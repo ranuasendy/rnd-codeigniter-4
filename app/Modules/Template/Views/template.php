@@ -25,13 +25,61 @@
   <link rel="stylesheet" href="<?=base_url('assets/plugins/daterangepicker/daterangepicker.css')?>">
   <!-- summernote -->
   <link rel="stylesheet" href="<?=base_url('assets/plugins/summernote/summernote-bs4.min.css')?>">
+  
+  <!-- jQuery -->
+  <script src="<?=base_url('assets/plugins/jquery/jquery.min.js')?>"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="<?=base_url('assets/plugins/jquery-ui/jquery-ui.min.js')?>"></script>
+  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <script>
+    $.widget.bridge('uibutton', $.ui.button)
+  </script>
+  <!-- Bootstrap 4 -->
+  <script src="<?=base_url('assets/plugins/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
+  <!-- ChartJS -->
+  <script src="<?=base_url('assets/plugins/chart.js/Chart.min.js')?>"></script>
+  <!-- Sparkline -->
+  <script src="<?=base_url('assets/plugins/sparklines/sparkline.js')?>"></script>
+  <!-- JQVMap -->
+  <script src="<?=base_url('assets/plugins/jqvmap/jquery.vmap.min.js')?>"></script>
+  <script src="<?=base_url('assets/plugins/jqvmap/maps/jquery.vmap.usa.js')?>"></script>
+  <!-- jQuery Knob Chart -->
+  <script src="<?=base_url('assets/plugins/jquery-knob/jquery.knob.min.js')?>"></script>
+  <!-- daterangepicker -->
+  <script src="<?=base_url('assets/plugins/moment/moment.min.js')?>"></script>
+  <script src="<?=base_url('assets/plugins/daterangepicker/daterangepicker.js')?>"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="<?=base_url('assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')?>"></script>
+  <!-- Summernote -->
+  <script src="<?=base_url('assets/plugins/summernote/summernote-bs4.min.js')?>"></script>
+  <!-- overlayScrollbars -->
+  <script src="<?=base_url('assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')?>"></script>
+  <!-- AdminLTE App -->
+  <script src="<?=base_url('assets/dist/js/adminlte.js')?>"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="<?=base_url('assets/dist/js/demo.js')?>"></script>
+  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+  <script src="<?=base_url('assets/dist/js/pages/dashboard.js')?>"></script>
+  <!-- DataTables  & Plugins -->
+  <script src="<?=base_url('assets/plugins/datatables/jquery.dataTables.min.js')?>"></script>
+  <script src="<?=base_url('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')?>"></script>
+  <script src="<?=base_url('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js')?>"></script>
+  <script src="<?=base_url('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')?>"></script>
+  <script src="<?=base_url('assets/plugins/datatables-buttons/js/dataTables.buttons.min.js')?>"></script>
+  <script src="<?=base_url('assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')?>"></script>
+  <script src="<?=base_url('assets/plugins/jszip/jszip.min.js')?>"></script>
+  <script src="<?=base_url('assets/plugins/pdfmake/pdfmake.min.js')?>"></script>
+  <script src="<?=base_url('assets/plugins/pdfmake/vfs_fonts.js')?>"></script>
+  <script src="<?=base_url('assets/plugins/datatables-buttons/js/buttons.html5.min.js')?>"></script>
+  <script src="<?=base_url('assets/plugins/datatables-buttons/js/buttons.print.min.js')?>"></script>
+  <script src="<?=base_url('assets/plugins/datatables-buttons/js/buttons.colVis.min.js')?>"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="<?=base_url('assets/dist/img/AdminLTELogo.png')?>" alt="AdminLTELogo" height="60" width="60">
+    <i class="fas fa-circle-notch fa-spin" style="font-size: 50px;"></i>
   </div>
 
   <!-- Navbar -->
@@ -57,8 +105,9 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="<?=site_url('home')?>" class="brand-link text-center">
-      <span class="brand-text font-weight-semibold">AKATSUKI SYSTEM</span>
+    <a href="<?=site_url('home')?>" class="brand-link logo-switch">
+      <span class="brand-text logo-xs font-weight-semibold" style="left: 42px;">A</span>
+      <span class="brand-text logo-xl font-weight-semibold" style="left: 40px;">AKATSUKI SYSTEM</span>
     </a>
 
     <!-- Sidebar -->
@@ -106,40 +155,5 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
-<!-- jQuery -->
-<script src="<?=base_url('assets/plugins/jquery/jquery.min.js')?>"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="<?=base_url('assets/plugins/jquery-ui/jquery-ui.min.js')?>"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 -->
-<script src="<?=base_url('assets/plugins/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
-<!-- ChartJS -->
-<script src="<?=base_url('assets/plugins/chart.js/Chart.min.js')?>"></script>
-<!-- Sparkline -->
-<script src="<?=base_url('assets/plugins/sparklines/sparkline.js')?>"></script>
-<!-- JQVMap -->
-<script src="<?=base_url('assets/plugins/jqvmap/jquery.vmap.min.js')?>"></script>
-<script src="<?=base_url('assets/plugins/jqvmap/maps/jquery.vmap.usa.js')?>"></script>
-<!-- jQuery Knob Chart -->
-<script src="<?=base_url('assets/plugins/jquery-knob/jquery.knob.min.js')?>"></script>
-<!-- daterangepicker -->
-<script src="<?=base_url('assets/plugins/moment/moment.min.js')?>"></script>
-<script src="<?=base_url('assets/plugins/daterangepicker/daterangepicker.js')?>"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="<?=base_url('assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')?>"></script>
-<!-- Summernote -->
-<script src="<?=base_url('assets/plugins/summernote/summernote-bs4.min.js')?>"></script>
-<!-- overlayScrollbars -->
-<script src="<?=base_url('assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')?>"></script>
-<!-- AdminLTE App -->
-<script src="<?=base_url('assets/dist/js/adminlte.js')?>"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?=base_url('assets/dist/js/demo.js')?>"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?=base_url('assets/dist/js/pages/dashboard.js')?>"></script>
 </body>
 </html>
