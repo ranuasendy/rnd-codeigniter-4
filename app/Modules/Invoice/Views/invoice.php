@@ -473,12 +473,20 @@
         </table>
     </div>
 </div>
-<script src="<?=base_url('assets/plugins/jquery/jquery.min.js')?>"></script>
 <script>
   $(function () {
     $("#example1").DataTable({
-       "paging": true, "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        "scrollResize": true,
+        "scrollY": 385,
+        "scrollX": "100%",
+        "scrollCollapse": true,
+        "paging": true,
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        "searching": false,
+        "select": true,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     });
   });
 </script>

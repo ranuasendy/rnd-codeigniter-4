@@ -25,7 +25,11 @@
   <link rel="stylesheet" href="<?=base_url('assets/plugins/daterangepicker/daterangepicker.css')?>">
   <!-- summernote -->
   <link rel="stylesheet" href="<?=base_url('assets/plugins/summernote/summernote-bs4.min.css')?>">
-  
+  <!-- DataTables -->
+  <link rel="stylesheet" href="<?=base_url('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')?>">
+  <link rel="stylesheet" href="<?=base_url('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')?>">
+  <link rel="stylesheet" href="<?=base_url('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')?>">
+
   <!-- jQuery -->
   <script src="<?=base_url('assets/plugins/jquery/jquery.min.js')?>"></script>
   <!-- jQuery UI 1.11.4 -->
@@ -56,10 +60,10 @@
   <script src="<?=base_url('assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')?>"></script>
   <!-- AdminLTE App -->
   <script src="<?=base_url('assets/dist/js/adminlte.js')?>"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="<?=base_url('assets/dist/js/demo.js')?>"></script>
-  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="<?=base_url('assets/dist/js/pages/dashboard.js')?>"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="<?=base_url('assets/dist/js/demo.js')?>"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="<?=base_url('assets/dist/js/pages/dashboard.js')?>"></script>
   <!-- DataTables  & Plugins -->
   <script src="<?=base_url('assets/plugins/datatables/jquery.dataTables.min.js')?>"></script>
   <script src="<?=base_url('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')?>"></script>
@@ -156,4 +160,34 @@
 </div>
 <!-- ./wrapper -->
 </body>
+<script>
+  function dataTableFitPageLenght() {
+	var api = this.api();
+    var rowCount = api.rows({page: 'current'}).count();
+    var colCount = $(this).find('thead tr:first th').length;
+    var col = '';
+
+    if (colCount > 0) {
+        col += '<tr>';
+
+        for (var i = 0; i < colCount; i++) {
+            col += '<td>&nbsp;</td>';
+        }
+
+        col += '</tr>';
+    }
+
+    for (var i = 0; i < api.page.len() - (rowCount === 0 ? 1 : rowCount); i++) {
+        $(this).find('tbody').append(col);
+    }
+
+    setTimeout(function(){
+        $('.dataTables_wrapper td.wrap-cell').css({
+            "white-space": "nowrap", 
+            "overflow": "hidden", 
+            "text-overflow": "ellipsis"
+        });
+    }, 0);
+}
+</script>
 </html>
