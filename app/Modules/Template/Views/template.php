@@ -168,6 +168,15 @@
   <!-- ./wrapper -->
 </body>
 <script>
+  $(document).ready(function() {
+    $('.select2').select2({
+      theme: 'bootstrap4',
+    });
+    $('.date-input').datetimepicker({
+      format: "YYYY-MM-DD"
+    });
+  });
+
   function dataTableFitPageLenght() {
     var api = this.api();
     var rowCount = api.rows({

@@ -27,8 +27,8 @@
         </div>
         <div class="row">
             <div class="col-4 d-flex" style="gap: 0.5rem;">
-                <button type="button" class="btn btn-success" style="flex: 1;" onclick="createAction()">Create IDR</button>
-                <button type="button" class="btn btn-success" style="flex: 1;">Create USD</button>
+                <button type="button" class="btn btn-success" style="flex: 1;" onclick="createAction('IDR')">Create IDR</button>
+                <button type="button" class="btn btn-success" style="flex: 1;" onclick="createAction('USD')">Create USD</button>
                 <button type="button" class="btn btn-warning" style="flex: 1;">Edit</button>
                 <button type="button" class="btn btn-danger" style="flex: 1;">Delete</button>
             </div>
@@ -487,7 +487,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="invoice_date">Date</label>
-                            <div class="input-group date" id="invoice_date" name="date" data-target-input="nearest">
+                            <div class="input-group date-input" id="invoice_date" name="date" data-target-input="nearest">
                                 <input type="text" class="form-control datetimepicker-input" data-target="#invoice_date" />
                                 <div class="input-group-append" data-target="#invoice_date" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -502,8 +502,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="invoice_code">Code</label>
-                            <select class="form-control select2 select2-danger" id="invoice_code" name="code" placeholder="Code" data-dropdown-css-class="select2-danger" style="width: 100%;">
-                                <option>Alabama</option>
+                            <select class="form-control select2 select2-danger" id="invoice_code" name="code" data-placeholder="Test" data-dropdown-css-class="select2-danger" style="width: 100%;">
                                 <option>Alaska</option>
                                 <option>California</option>
                                 <option>Delaware</option>
@@ -622,13 +621,32 @@
         </div>
     </div>
 </div>
-<script>
+<script src="<?= base_url('assets/modules/invoice/invoice.js') ?>"></script>
+<script type="text/javascript">
     const invoiceModal = $("#invoiceModal");
     const invoiceModalHeader = $("#invoiceModalHeader");
     const invoiceForm = {
         group: $("#invoice_form"),
         controls: {
-            date: $("#invoice_date > input")
+            date: $("#invoice_date > input"),
+            currency: $("#invoice_currency"),
+            code: $("#invoice_code"),
+            category: $("#invoice_category"),
+            to: $("#invoice_to"),
+            address: $("#invoice_address"),
+            phone: $("#invoice_phone"),
+            email: $("#invoice_email"),
+            description: $("#invoice_description"),
+            quantity: $("#invoice_quantity"),
+            price: $("#invoice_price"),
+            sub_total: $("#invoice_sub_total"),
+            tax: $("#invoice_tax"),
+            other: $("#invoice_other"),
+            deduction: $("#invoice_deduction"),
+            total: $("#invoice_total"),
+            paid_by: $("#invoice_paid_by"),
+            status: $("#invoice_status"),
+            received: $("#invoice_received")
         }
     };
 
@@ -651,23 +669,5 @@
             "select": true,
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         });
-
-        $('#reservationdate').datetimepicker({
-            format: "YYYY-MM-DD"
-        });
-
-        $('.select2').select2({
-            theme: 'bootstrap4'
-        });
     });
-
-    function createAction() {
-        const today = new Date();
-
-        invoiceForm.group.trigger("reset");
-        invoiceForm.group.attr("url", urls.create);
-        invoiceForm.controls.date.val(today.toISOString().split("T").shift());
-        invoiceModalHeader.text("New Invoice");
-        invoiceModal.modal("show");
-    };
 </script>
