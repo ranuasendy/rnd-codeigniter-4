@@ -33,10 +33,9 @@
                 <button type="button" class="btn btn-danger" style="flex: 1;">Delete</button>
             </div>
             <div class="col-3">
-                <div class="btn-group w-100">
+                <div id="export_buttons" class="btn-group w-100">
                     <button type="button" class="btn btn-default">Invoice</button>
                     <button type="button" class="btn btn-default">Receipt</button>
-                    <button type="button" class="btn btn-default">Download</button>
                 </div>
             </div>
         </div>
@@ -46,7 +45,7 @@
             <thead>
                 <tr>
                     <th width="30px">No.</th>
-                    <th width="30px"></th>
+                    <th width="30px">#ID</th>
                     <th width="80px">Date</th>
                     <th width="50px">Currency</th>
                     <th width="80px">Code</th>

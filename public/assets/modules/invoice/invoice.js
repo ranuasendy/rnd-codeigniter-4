@@ -89,8 +89,24 @@ function initDatatables() {
         "lengthChange": false,
         "autoWidth": false,
         "searching": false,
-        "select": true
-    });
+        "select": true,
+        "buttons": [
+            {
+                extend: "excelHtml5",
+                text: "Download",
+                className: "btn-default",
+                title: "Invoice - Akatsuki System",
+                filename: "Invoice_" + new Date().toISOString().replaceAll(" ", "_"),
+                customize: function (xlsx) {
+                    var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                    
+                    // jQuery selector to add a border
+                    $('row c', sheet).attr('s', '25');
+                    $('row c[r*="2"]', sheet).attr('s', '32');
+                }
+            }
+        ]
+    }).buttons().container().appendTo("#export_buttons");
 }
 
 function createAction(currency) {
