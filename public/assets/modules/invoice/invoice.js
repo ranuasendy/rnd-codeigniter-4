@@ -1,5 +1,5 @@
 function initDatatables() {
-	invoiceTable.DataTable({
+    invoiceTable.DataTable({
         // "ajax": urls.datatables,
         "data": [
             {
@@ -98,30 +98,45 @@ function initDatatables() {
                 title: "Invoice - Akatsuki System",
                 filename: "Invoice_" + new Date().toISOString().replaceAll(" ", "_"),
                 customize: function (xlsx) {
-                    var sheet = xlsx.xl.worksheets['sheet1.xml'];
-                    
+                    var sheet = xlsx.xl.worksheets["sheet1.xml"];
+
                     // jQuery selector to add a border
-                    $('row c', sheet).attr('s', '25');
-                    $('row c[r*="2"]', sheet).attr('s', '32');
+                    $("row c", sheet).attr("s", "25");
+                    $('row c[r*="2"]', sheet).attr("s", "32");
                 }
             }
         ]
     }).buttons().container().appendTo("#export_buttons");
 }
 
-function createAction(currency) {
-    this.resetForm();
-    invoiceForm.controls.currency.val(currency);
-    invoiceForm.group.attr("url", urls.create);
-    invoiceModalHeader.text("New Invoice");
-    invoiceModal.modal("show");
-};
-
 function resetForm() {
     const today = new Date();
     invoiceForm.group.trigger("reset");
     invoiceForm.controls.date.val(today.toISOString().split("T").shift());
     invoiceForm.group.find(".select2").val(null).trigger("change");
+}
+
+function loadForm(data) {
+    invoiceForm.controls.id.val(data.id);
+    invoiceForm.controls.date.val(data.date);
+    invoiceForm.controls.currency.val(data.currency);
+    invoiceForm.controls.code.val(data.code).trigger("change");
+    invoiceForm.controls.category.val(data.category).trigger("change");
+    invoiceForm.controls.to.val(data.to);
+    invoiceForm.controls.address.val(data.address);
+    invoiceForm.controls.phone.val(data.phone);
+    invoiceForm.controls.email.val(data.email);
+    invoiceForm.controls.description.val(data.description);
+    invoiceForm.controls.quantity.val(data.quantity);
+    invoiceForm.controls.price.val(data.price);
+    invoiceForm.controls.sub_total.val(data.sub_total);
+    invoiceForm.controls.tax.val(data.tax);
+    invoiceForm.controls.other.val(data.other);
+    invoiceForm.controls.deduction.val(data.deduction);
+    invoiceForm.controls.total.val(data.total);
+    invoiceForm.controls.paid_by.val(data.paid_by).trigger("change");
+    invoiceForm.controls.status.val(data.status).trigger("change");
+    invoiceForm.controls.received.val(data.received);
 }
 
 function calculateSubTotal() {
@@ -137,15 +152,118 @@ function calculateSubTotal() {
 function calculateTotal() {
     let subTotal = invoiceForm.controls.sub_total.val();
     subTotal = !isNaN(parseInt(subTotal)) ? parseInt(subTotal) : 0;
-    
+
     let tax = invoiceForm.controls.tax.val();
     tax = !isNaN(parseInt(tax)) ? parseInt(tax) : 0;
-    
+
     let other = invoiceForm.controls.other.val();
     other = !isNaN(parseInt(other)) ? parseInt(other) : 0;
 
     let deduction = invoiceForm.controls.deduction.val();
     deduction = !isNaN(parseInt(deduction)) ? parseInt(deduction) : 0;
-    
+
     invoiceForm.controls.total.val((subTotal - (subTotal * tax / 100)) + other - deduction);
+}
+
+function createAction(currency) {
+    resetForm();
+    invoiceForm.controls.currency.val(currency);
+    invoiceForm.group.attr("url", urls.create);
+    invoiceModalHeader.text("New Invoice");
+    invoiceModal.modal("show");
+}
+
+function editAction() {
+    const selected = invoiceTable.DataTable().row({ selected: true }).data();
+
+    if (selected) {
+        $.ajax({
+            url: urls.detail + '/' + selectedRow.id,
+            dataType: 'json',
+            success: function (data) {
+                if (data) {
+                    resetForm();
+                    loadForm(data);
+                    invoiceForm.group.attr("url", urls.edit + "/" + data.id);
+                    invoiceModalHeader.text("Edit Invoice");
+                    invoiceModal.modal("show");
+                }
+            }
+        });
+    } else {
+        $(document).Toasts("create", {
+            title: "Info",
+            class: "bg-info",
+            icon: "fa fa-info-circle",
+            close: false,
+            autohide: true,
+            delay: 1500,
+            body: "Please select a row first!"
+        });
+    }
+}
+
+
+
+function submitAction() {
+    $.ajax({
+        url: invoiceForm.group.attr('url'),
+        data: invoiceForm.serialize(),
+        method: 'POST',
+        dataType: 'json',
+        success: function (data) {
+            if (data.success) {
+                invoiceTable.DataTable().ajax.reload();
+                invoiceModal.modal("close");
+
+                $(document).Toasts("create", {
+                    title: "Success",
+                    class: "bg-success",
+                    icon: "fa fa-check",
+                    close: false,
+                    autohide: true,
+                    delay: 1500,
+                    body: data.message
+                });
+            } else {
+                $(document).Toasts("create", {
+                    title: "Error",
+                    class: "bg-error",
+                    icon: "fa fa-times",
+                    close: false,
+                    autohide: true,
+                    delay: 1500,
+                    body: data.message
+                });
+            }
+        }
+    })
+}
+
+function deleteAction() {
+	const selected = invoiceTable.DataTable().row({ selected: true }).data();
+
+	if (selected) {
+        showPrompt({
+            title: 'Delete Part',
+            text: 'Apakah anda yakin ingin menghapus data part ini?',
+            submit: 'Delete',
+            action: function() {
+                $.ajax({
+                    url: urls.delete + '/' + selectedRow.id,
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.success) {
+                            dtPart.DataTable().ajax.reload();
+                            hidePrompt();
+                        }
+
+                        showToast(data.msg, 'right-bottom');
+                    }
+                })
+            }
+        });
+	} else {
+		showToast('Please select a row first!', 'right-bottom');
+	}
 }

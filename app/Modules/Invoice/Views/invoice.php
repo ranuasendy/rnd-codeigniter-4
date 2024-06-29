@@ -29,7 +29,7 @@
             <div class="col-4 d-flex" style="gap: 0.5rem;">
                 <button type="button" class="btn btn-success" style="flex: 1;" onclick="createAction('IDR')">Create IDR</button>
                 <button type="button" class="btn btn-success" style="flex: 1;" onclick="createAction('USD')">Create USD</button>
-                <button type="button" class="btn btn-warning" style="flex: 1;">Edit</button>
+                <button type="button" class="btn btn-warning" style="flex: 1;" onclick="editAction()">Edit</button>
                 <button type="button" class="btn btn-danger" style="flex: 1;">Delete</button>
             </div>
             <div class="col-3">
@@ -81,6 +81,7 @@
             </div>
             <div class="modal-body">
                 <form id="invoice_form">
+                    <input id="invoice_id" type="hidden" name="id">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="invoice_date">Date</label>
@@ -215,6 +216,7 @@
     const invoiceForm = {
         group: $("#invoice_form"),
         controls: {
+            id: $("#invoice_id"),
             date: $("#invoice_date > input"),
             currency: $("#invoice_currency"),
             code: $("#invoice_code"),

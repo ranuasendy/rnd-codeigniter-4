@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Akatsuki System</title>
+  <title><?= $title ? $title." | Akatsuki System" : "Akatsuki System" ?></title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -14,18 +14,10 @@
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Tempusdominus Bootstrap 4 -->
   <link rel="stylesheet" href="<?= base_url('assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') ?>">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="<?= base_url('assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css') ?>">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="<?= base_url('assets/plugins/jqvmap/jqvmap.min.css') ?>">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?= base_url('assets/dist/css/adminlte.min.css') ?>">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="<?= base_url('assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') ?>">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="<?= base_url('assets/plugins/daterangepicker/daterangepicker.css') ?>">
-  <!-- summernote -->
-  <link rel="stylesheet" href="<?= base_url('assets/plugins/summernote/summernote-bs4.min.css') ?>">
   <!-- DataTables -->
   <link rel="stylesheet" href="<?= base_url('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') ?>">
   <link rel="stylesheet" href="<?= base_url('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') ?>">
@@ -34,6 +26,8 @@
   <!-- Select2 -->
   <link rel="stylesheet" href="<?= base_url('assets/plugins/select2/css/select2.min.css') ?>">
   <link rel="stylesheet" href="<?= base_url('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') ?>">
+  <!-- Template -->
+  <link rel="stylesheet" href="<?= base_url('assets/modules/template/template.css') ?>">
 
   <!-- jQuery -->
   <script src="<?= base_url('assets/plugins/jquery/jquery.min.js') ?>"></script>
@@ -45,24 +39,11 @@
   </script>
   <!-- Bootstrap 4 -->
   <script src="<?= base_url('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
-  <!-- ChartJS -->
-  <script src="<?= base_url('assets/plugins/chart.js/Chart.min.js') ?>"></script>
-  <!-- Sparkline -->
-  <script src="<?= base_url('assets/plugins/sparklines/sparkline.js') ?>"></script>
-  <!-- JQVMap -->
-  <script src="<?= base_url('assets/plugins/jqvmap/jquery.vmap.min.js') ?>"></script>
-  <script src="<?= base_url('assets/plugins/jqvmap/maps/jquery.vmap.usa.js') ?>"></script>
-  <!-- jQuery Knob Chart -->
-  <script src="<?= base_url('assets/plugins/jquery-knob/jquery.knob.min.js') ?>"></script>
   <!-- daterangepicker -->
   <script src="<?= base_url('assets/plugins/moment/moment.min.js') ?>"></script>
   <script src="<?= base_url('assets/plugins/daterangepicker/daterangepicker.js') ?>"></script>
   <!-- Tempusdominus Bootstrap 4 -->
   <script src="<?= base_url('assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') ?>"></script>
-  <!-- Summernote -->
-  <script src="<?= base_url('assets/plugins/summernote/summernote-bs4.min.js') ?>"></script>
-  <!-- overlayScrollbars -->
-  <script src="<?= base_url('assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') ?>"></script>
   <!-- AdminLTE App -->
   <script src="<?= base_url('assets/dist/js/adminlte.js') ?>"></script>
   <!-- AdminLTE for demo purposes -->
@@ -130,13 +111,13 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item">
-              <a href="<?= site_url('home') ?>" class="nav-link">
+              <a href="<?= site_url('home') ?>" id="menu_home" class="nav-link">
                 <i class="nav-icon fas fa-home"></i>
                 <p>Home</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?= site_url('invoice') ?>" class="nav-link">
+              <a href="<?= site_url('invoice') ?>" id="menu_invoice" class="nav-link active">
                 <i class="nav-icon fas fa-receipt"></i>
                 <p>Invoice</p>
               </a>
@@ -169,6 +150,8 @@
   <!-- ./wrapper -->
 </body>
 <script>
+	var menuId = <?php echo $menu_id; ?>;
+
   $(document).ready(function() {
     $('.select2').select2({
       theme: 'bootstrap4',
@@ -177,6 +160,8 @@
     $('.date-input').datetimepicker({
       format: "YYYY-MM-DD"
     });
+
+    $(menuId).addClass('active');
   });
 </script>
 
