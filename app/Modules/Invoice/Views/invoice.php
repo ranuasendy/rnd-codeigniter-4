@@ -13,9 +13,9 @@
             </div>
             <div class="col-3 d-flex flex-column justify-content-between mb-3">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search...">
+                    <input type="text" id="invoice_search" class="form-control" placeholder="Search..." onchange="searchAction()">
                     <span class="input-group-append">
-                        <button type="button" class="btn btn-primary btn-flat"><i class="fas fa-search"></i></button>
+                        <button type="button" class="btn btn-primary btn-flat" onclick="searchAction()"><i class="fas fa-search"></i></button>
                     </span>
                 </div>
                 <div class="btn-group">
@@ -34,8 +34,8 @@
             </div>
             <div class="col-3">
                 <div id="export_buttons" class="btn-group w-100">
-                    <button type="button" class="btn btn-default">Invoice</button>
-                    <button type="button" class="btn btn-default">Receipt</button>
+                    <button type="button" class="btn btn-default" onclick="printAction('invoice')">Invoice</button>
+                    <button type="button" class="btn btn-default" onclick="printAction('receipt')">Receipt</button>
                 </div>
             </div>
         </div>
@@ -241,6 +241,7 @@
 
     const urls = {
         site: "<?= site_url("/invoice") ?>",
+        datatables: "<?= site_url("/invoice/datatables") ?>",
         create: "<?= site_url("/invoice/create") ?>",
         detail: "<?= site_url("/invoice/detail") ?>",
         edit: "<?= site_url("/invoice/edit") ?>",

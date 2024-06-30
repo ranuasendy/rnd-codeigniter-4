@@ -27,10 +27,10 @@ function initDatatables() {
             {
                 id: 2,
                 date: "2024-05-27",
-                currency: "IDR",
-                code: "Code 1",
-                category: "Category 1",
-                to: "Test User",
+                currency: "USD",
+                code: "Code 2",
+                category: "Category 2",
+                to: "Test Admin",
                 address: "Jakarta, Indonesia",
                 phone: "088888888",
                 email: "test@test.test",
@@ -88,8 +88,9 @@ function initDatatables() {
         "responsive": false,
         "lengthChange": false,
         "autoWidth": false,
-        "searching": false,
+        "searching": true,
         "select": true,
+        "dom": 'lrt<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
         "buttons": [
             {
                 extend: "excelHtml5",
@@ -107,6 +108,12 @@ function initDatatables() {
             }
         ]
     }).buttons().container().appendTo("#export_buttons");
+}
+
+function searchAction() {
+    const value = $('#invoice_search').val();
+    invoiceTable.DataTable().search(value, false, true).draw();
+    console.log(value);
 }
 
 function resetForm() {
@@ -294,4 +301,9 @@ function deleteAction() {
             body: "Please select a row first!"
         });
     }
+}
+
+function printAction(type) {
+    var params = { mode: "print", type: type };
+    window.open(urls.site + '?' + $.param(params), '_blank');
 }
