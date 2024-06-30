@@ -30,7 +30,7 @@
                 <button type="button" class="btn btn-success" style="flex: 1;" onclick="createAction('IDR')">Create IDR</button>
                 <button type="button" class="btn btn-success" style="flex: 1;" onclick="createAction('USD')">Create USD</button>
                 <button type="button" class="btn btn-warning" style="flex: 1;" onclick="editAction()">Edit</button>
-                <button type="button" class="btn btn-danger" style="flex: 1;">Delete</button>
+                <button type="button" class="btn btn-danger" style="flex: 1;" onclick="deleteAction()">Delete</button>
             </div>
             <div class="col-3">
                 <div id="export_buttons" class="btn-group w-100">
@@ -242,6 +242,9 @@
     const urls = {
         site: "<?= site_url("/invoice") ?>",
         create: "<?= site_url("/invoice/create") ?>",
+        detail: "<?= site_url("/invoice/detail") ?>",
+        edit: "<?= site_url("/invoice/edit") ?>",
+        delete: "<?= site_url("/invoice/delete") ?>",
     };
 
     $(function() {

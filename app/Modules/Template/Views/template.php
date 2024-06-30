@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><?= $title ? $title." | Akatsuki System" : "Akatsuki System" ?></title>
+  <title><?= $title ? $title . " | Akatsuki System" : "Akatsuki System" ?></title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -46,10 +46,6 @@
   <script src="<?= base_url('assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') ?>"></script>
   <!-- AdminLTE App -->
   <script src="<?= base_url('assets/dist/js/adminlte.js') ?>"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="<?= base_url('assets/dist/js/demo.js') ?>"></script>
-  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="<?= base_url('assets/dist/js/pages/dashboard.js') ?>"></script>
   <!-- DataTables  & Plugins -->
   <script src="<?= base_url('assets/plugins/datatables/jquery.dataTables.min.js') ?>"></script>
   <script src="<?= base_url('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
@@ -117,7 +113,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?= site_url('invoice') ?>" id="menu_invoice" class="nav-link active">
+              <a href="<?= site_url('invoice') ?>" id="menu_invoice" class="nav-link">
                 <i class="nav-icon fas fa-receipt"></i>
                 <p>Invoice</p>
               </a>
@@ -136,21 +132,42 @@
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+
+    <!-- Footer -->
     <footer class="main-footer text-center">
       <strong>Copyright &copy; Akatsuki International</strong>
       All rights reserved.
     </footer>
+    <!-- /.footer -->
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
+    <!-- Prompt -->
+    <div class="modal fade" id="modal_prompt">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">New Prompt</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Prompt description...</p>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" id="modal_prompt_submit" class="btn btn-primary">Ok</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.prompt -->
   </div>
-  <!-- ./wrapper -->
 </body>
 <script>
-	var menuId = <?php echo $menu_id; ?>;
+  const menuId = <?php echo $menu_id; ?>;
+  const modalPrompt = $("#modal_prompt");
 
   $(document).ready(function() {
     $('.select2').select2({

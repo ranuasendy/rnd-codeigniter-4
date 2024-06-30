@@ -28,3 +28,20 @@ function dataTableFitPageLength() {
         });
     }, 0);
 }
+
+function showPrompt(params = {}) {
+    modalPrompt.find(".modal-title").html(params.title || "New Prompt");
+    modalPrompt.find(".modal-body").html(params.text || "");
+
+    const submitBtn = modalPrompt.find("#modal_prompt_submit");
+    submitBtn.off("click");
+    submitBtn.html(params.submit || "Ok");
+    if (params.action) submitBtn.on("click", params.action);
+    if (params.submitClass) submitBtn.toggleClass(params.submitClass);
+
+    modalPrompt.modal("show");
+}
+
+function hidePrompt() {
+    modalPrompt.modal("hide");
+}

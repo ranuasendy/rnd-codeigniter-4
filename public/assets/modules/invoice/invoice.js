@@ -178,8 +178,8 @@ function editAction() {
 
     if (selected) {
         $.ajax({
-            url: urls.detail + '/' + selectedRow.id,
-            dataType: 'json',
+            url: urls.detail + "/" + selected.id,
+            dataType: "json",
             success: function (data) {
                 if (data) {
                     resetForm();
@@ -207,10 +207,10 @@ function editAction() {
 
 function submitAction() {
     $.ajax({
-        url: invoiceForm.group.attr('url'),
+        url: invoiceForm.group.attr("url"),
         data: invoiceForm.serialize(),
-        method: 'POST',
-        dataType: 'json',
+        method: "POST",
+        dataType: "json",
         success: function (data) {
             if (data.success) {
                 invoiceTable.DataTable().ajax.reload();
@@ -241,29 +241,57 @@ function submitAction() {
 }
 
 function deleteAction() {
-	const selected = invoiceTable.DataTable().row({ selected: true }).data();
+    const selected = invoiceTable.DataTable().row({ selected: true }).data();
 
-	if (selected) {
+    if (selected) {
         showPrompt({
-            title: 'Delete Part',
-            text: 'Apakah anda yakin ingin menghapus data part ini?',
-            submit: 'Delete',
-            action: function() {
+            title: "Delete Invoice",
+            text: "Are you sure to delete this invoice?",
+            submit: "Delete",
+            submitClass: "btn-danger",
+            action: function () {
                 $.ajax({
-                    url: urls.delete + '/' + selectedRow.id,
-                    dataType: 'json',
-                    success: function(data) {
+                    url: urls.delete + "/" + selected.id,
+                    dataType: "json",
+                    success: function (data) {
                         if (data.success) {
-                            dtPart.DataTable().ajax.reload();
-                            hidePrompt();
-                        }
+                            invoiceTable.DataTable().ajax.reload();
 
-                        showToast(data.msg, 'right-bottom');
+                            $(document).Toasts("create", {
+                                title: "Success",
+                                class: "bg-success",
+                                icon: "fa fa-check",
+                                close: false,
+                                autohide: true,
+                                delay: 1500,
+                                body: data.message
+                            });
+                        } else {
+                            $(document).Toasts("create", {
+                                title: "Error",
+                                class: "bg-error",
+                                icon: "fa fa-times",
+                                close: false,
+                                autohide: true,
+                                delay: 1500,
+                                body: data.message
+                            });
+                        }
                     }
-                })
+                });
+
+                hidePrompt();
             }
         });
-	} else {
-		showToast('Please select a row first!', 'right-bottom');
-	}
+    } else {
+        $(document).Toasts("create", {
+            title: "Info",
+            class: "bg-info",
+            icon: "fa fa-info-circle",
+            close: false,
+            autohide: true,
+            delay: 1500,
+            body: "Please select a row first!"
+        });
+    }
 }
